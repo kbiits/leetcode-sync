@@ -154,6 +154,7 @@ async function commit(params) {
     LANG_TO_EXTENSION[submission.lang]
   }`; // Separate file for the solution
 
+  
   const treeData = [
     {
       path: questionPath,
@@ -167,12 +168,19 @@ async function commit(params) {
     },
   ];
 
+  log(`this is question path: ${questionPath} and solution path: ${solutionPath}`)
+  log(`tree data :`)
+  console.log(treeData)
+
   const treeResponse = await octokit.git.createTree({
     owner: owner,
     repo: repo,
     base_tree: treeSHA,
     tree: treeData,
   });
+
+  log(`tree response :`)
+  console.log(treeResponse)
 
   const date = new Date(Number(submission.timestamp) * 1000).toISOString();
   const commitResponse = await octokit.git.createCommit({
