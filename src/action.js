@@ -134,6 +134,7 @@ async function commit(params) {
 
   const name = normalizeName(submission.title);
   log(`Committing solution for ${name}...`);
+  log(`logs come here`)
 
   if (!LANG_TO_EXTENSION[submission.lang]) {
     throw `Language ${submission.lang} does not have a registered extension.`;
@@ -141,6 +142,8 @@ async function commit(params) {
 
   const prefix = !!destinationFolder ? `${destinationFolder}/` : "";
   const commitName = !!commitHeader ? commitHeader : COMMIT_MESSAGE;
+
+  log(`prefix : ${prefix} commitName : ${commitName}`)
 
   if ("runtimePerc" in submission) {
     message = `${commitName} Runtime - ${submission.runtime} (${submission.runtimePerc}), Memory - ${submission.memory} (${submission.memoryPerc})`;
